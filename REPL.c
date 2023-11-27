@@ -39,8 +39,7 @@ int main(){
 		}
 		else{
 			int status;
-			waitpid(currentPid,&status,0);//if it the pid of the father, we wait hte execution of the child to go back 
-			//to thechild again
+			waitpid(currentPid,&status,0);//if it the pid of the father, we wait hte execution of the child to go back to the child again
 		}
 		
 	}
