@@ -10,7 +10,7 @@
 #include <sys/wait.h>
 
 
-#include "constantHeader.h"
+#include "constantHeader.h" 
 
 
 
@@ -28,7 +28,11 @@ int main(){
 			exiting=0;
 		}
 		
+<<<<<<< HEAD
 		if (strcmp(buf,"exit\n")==0){
+=======
+		if (strcmp(buf,"exit \n")){ //Question 3
+>>>>>>> 52a3aa3a31503d0f8bd44ce000b122a66cfa1b97
 			write(STDOUT_FILENO,EXIT_MESSAGE, strlen(EXIT_MESSAGE));
 			return 0;
 		}
