@@ -14,3 +14,7 @@
 //Constant for Q2
 #define BUFFERSIZE 128
 
+//Constant Q3
+#define EXIT_MESSAGE "enseash % exit\nBye bye...\n$\n"
+
+

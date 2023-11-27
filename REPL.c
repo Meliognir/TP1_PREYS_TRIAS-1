@@ -28,6 +28,11 @@ int main(){
 			exiting=0;
 		}
 		
+		if (strcmp(buf,"exit \n")){
+			write(STDOUT_FILENO,EXIT_MESSAGE, strlen(EXIT_MESSAGE));
+			return 0;
+		}
+		
 		pid_t currentPid=fork();
 		
 		if (currentPid==-1){
@@ -37,10 +42,13 @@ int main(){
 			buf[strlen(buf)-1]=0; //the last character of the buf is disappearing to read exactly what we want and no more
 			execlp(buf,buf,NULL);
 		}
+		
+			
 		else{
 			int status;
 			waitpid(currentPid,&status,0);//if it the pid of the father, we wait hte execution of the child to go back to the child again
 		}
+		
 		
 	}
 	return 0;
