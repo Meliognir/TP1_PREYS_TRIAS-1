@@ -28,7 +28,7 @@ int main(){
 			exiting=0;
 		}
 		
-		if (strcmp(buf,"exit \n")){
+		if (strcmp(buf,"exit\n")==0){
 			write(STDOUT_FILENO,EXIT_MESSAGE, strlen(EXIT_MESSAGE));
 			return 0;
 		}
