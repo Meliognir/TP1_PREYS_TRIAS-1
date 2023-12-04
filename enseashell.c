@@ -93,7 +93,7 @@ int main(int argc, char *argv[]){
 			exiting=1;
 		}
 		else{
-			sprintf(error_message, "$ enseash [error : 0| %2.1f ms]%%", elapsed_time); // no error : we display error 0
+			sprintf(error_message, "$ enseash [exit : 0| %2.1f ms]%%", elapsed_time); // no error : we display error 0
 			write(STDOUT_FILENO,error_message,strlen(error_message));
 		}
 	}
