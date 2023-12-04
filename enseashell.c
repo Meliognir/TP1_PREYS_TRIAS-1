@@ -54,7 +54,7 @@ int main(int argc, char *argv[]){
 		//Question 2 & 6 & 7
 		if (currentPid==0){ 
 			token = strtok(buf,separators);// token will be a pointer to character chain, it helps us considering spaces as something than can link commands
-			char *args[32];// we limit the value of the input we can have to 31 character
+			char *args[32];// we limit the value of the input we can have to 31 character, we should have put 32 as a constant in the constantHeader file 
 			int i=0;
 			while (token != NULL && i < 31) {
 				if (strcmp(token, "<") == 0) {
