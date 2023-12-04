@@ -59,20 +59,20 @@ int main(int argc, char *argv[]){
 			while (token != NULL && i < 31) {
 				if (strcmp(token, "<") == 0) {
 					token = strtok(NULL, separators);
-                    int fd = open(token, O_RDONLY); //open on read only to have the output
-                    dup2(fd, STDIN_FILENO);//used to duplicate file descriptors. It allows us to make a copy of a file descriptor and associate it with another file descriptor number. Here, the oldfile fd will be duplicated in STDIN_FILENO and be displayed
-                    close(fd);
-                } else if (strcmp(token, ">") == 0) {
-					token = strtok(NULL, separators);; // Fichier pour la sortie standard
-                    int fd = open(token, O_WRONLY | O_CREAT | O_TRUNC, 0644);//token est le nom du fichier à ouvrir en Write&ReasOnly, O_CREAT pour le créer si il n'existe pas et O_TRUNC pour mettre le fichier à 0 Octer si il exitse déjà, enfin 0644 est un masque de permission local pour écrire et lire dans le fichier
-                    dup2(fd, STDOUT_FILENO);
-                    close(fd);
-                } else {
-                    args[i++] = token;
-                }
-                token = strtok(NULL, separators);
-            }
-            args[i] = NULL;
+                    			int fd = open(token, O_RDONLY); //open on read only to have the output
+                    			dup2(fd, STDIN_FILENO);//used to duplicate file descriptors. It allows us to make a copy of a file descriptor and associate it with another file descriptor number. Here, the oldfile fd will be duplicated in STDIN_FILENO and be displayed
+                    			close(fd);//we can close fd as the result is now in STDIN_FILENO
+                		} else if (strcmp(token, ">") == 0) { //same process as before but with > 
+					token = strtok(NULL, separators); 
+                    			int fd = open(token, O_WRONLY | O_CREAT | O_TRUNC, 0644);//token est le nom du fichier à ouvrir en Write&ReasOnly, O_CREAT pour le créer si il n'existe pas et O_TRUNC pour mettre le fichier à 0 Octer si il exitse déjà, enfin 0644 est un masque de permission local pour écrire et lire dans le fichier
+                   			dup2(fd, STDOUT_FILENO);
+                    			close(fd);
+                		} else {
+                    			args[i++] = token;
+                		}
+                	token = strtok(NULL, separators);
+           		}
+            	args[i] = NULL;
 			execvp(buf,args); // if we want Q2 only : execlp(buf,buf,NULL);
 			exit(-1);
 		}	
@@ -96,10 +96,7 @@ int main(int argc, char *argv[]){
 			sprintf(error_message, "$ enseash [error : 0| %2.1f ms]%%", elapsed_time); // no error : we display error 0
 			write(STDOUT_FILENO,error_message,strlen(error_message));
 		}
-
-		
 	}
-
 	free(buf);
 	return 0;
 }
