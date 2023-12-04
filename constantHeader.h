@@ -18,8 +18,8 @@
 #define EXIT_MESSAGE "Bye bye...\n$\n"
 
 //Constant Q4
-#define ERROR0_MESSAGE "$ enseash [error : 0| %f ms]%" //when there are no errors
-#define ERROR1_MESSAGE "$ enseash [error : 1]%" // when there are errors
+#define ERROR0_MESSAGE "$ enseash [exit : 0| %f ms]%" //when there are no errors
+#define ERROR1_MESSAGE "$ enseash [exit : 1]%" // when there are errors
 
 //Constant Q5
 #define ERROR0_MESSAGE_SIZE 50 // Taille de la chaîne ERROR0_MESSAGE
