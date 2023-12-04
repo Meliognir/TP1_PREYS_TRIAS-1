@@ -18,20 +18,20 @@ int main(){
 	char *buf=0;
 	int exiting =1;
 	buf=calloc(BUFFERSIZE,sizeof(char)); //Dynamic allocation of memory 
+	int statusOut=write(STDOUT_FILENO,WELCOME_MESSAGE, strlen(WELCOME_MESSAGE));
 	
 	while(exiting!=0){
-	
-		int statusOut =write(STDOUT_FILENO,WELCOME_MESSAGE, strlen(WELCOME_MESSAGE));
-		read(STDIN_FILENO,buf,BUFFERSIZE);
-		if (statusOut==-1){
-			perror("Writing error");//The files has not been created
-			exiting=0;
-		}
 		
+		read(STDIN_FILENO,buf,BUFFERSIZE);
+		
+
+		//Question 3 
 		if (strcmp(buf,"exit\n")==0){
 			write(STDOUT_FILENO,EXIT_MESSAGE, strlen(EXIT_MESSAGE));
+			exiting=0;
 			return 0;
 		}
+		
 		
 		pid_t currentPid=fork();
 		
@@ -41,13 +41,22 @@ int main(){
 		if (currentPid==0){
 			buf[strlen(buf)-1]=0; //the last character of the buf is disappearing to read exactly what we want and no more
 			execlp(buf,buf,NULL);
-		}
-		
-			
+		}	
 		else{
 			int status;
 			waitpid(currentPid,&status,0);//if it the pid of the father, we wait hte execution of the child to go back to the child again
 		}
+		
+		//Question 4
+		if (statusOut==-1){
+			write(STDOUT_FILENO,ERROR1_MESSAGE, strlen(ERROR1_MESSAGE));//The files has not been created
+			exiting=0;
+		}
+		else{
+			waitpid(currentPid,&statusOut,0);
+			write(STDOUT_FILENO,ERROR0_MESSAGE, strlen(ERROR0_MESSAGE));
+		}
+		
 		
 		
 	}
